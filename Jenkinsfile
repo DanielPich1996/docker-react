@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        Dockerfile true
-    }
+    agent {label 'linux'}
     stages {
         stage('Test') {
             steps {
