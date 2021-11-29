@@ -12,12 +12,17 @@
 // }
 
 pipeline {
-    agent any
+    docker
+        {
+            image 'node:16-alpine'
+            //This exposes application through port 8081 to outside world
+            args '-u root -p 8081:8081 -v /var/run/docker.sock:/var/run/docker.sock  '
+        }
     stages {
         stage('build') {
             steps {
                 sh ''' 
-                    docker build -t danielpich/docker-react -f Dockerfile.dev . -v /var/run/docker.sock:/var/run/docker.sock
+                    docker build -t danielpich/docker-react -f Dockerfile.dev .
                     ''' 
             }
         }
