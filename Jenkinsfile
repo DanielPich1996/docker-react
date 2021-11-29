@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                docker build -t danielpich/docker-react -f Dockerfile.dev . -v /var/run/docker.sock:/var/run/docker.sock 
+                docker build -t danielpich/docker-react -f Dockerfile.dev . 
             }
         }
         stage('test') {
