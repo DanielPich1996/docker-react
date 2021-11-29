@@ -12,7 +12,7 @@
 // }
 
 pipeline {
-    agent any
+    agent docker
     stages {
         stage('build') {
             steps {
