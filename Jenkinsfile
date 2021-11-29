@@ -19,7 +19,7 @@ pipeline {
                 echo 'building'
             }
         }
-        sstage('test') {
+        stage('test') {
             steps {
                 echo 'testing'
             }
