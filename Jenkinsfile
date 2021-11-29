@@ -12,15 +12,12 @@
 // }
 
 pipeline {
-    tool {
-        docker 'docker'
-    }
     agent any
     stages {
         stage('build') {
             steps {
                 sh ''' 
-                    docker build -t danielpich/docker-react -f Dockerfile.dev .
+                    docker build -t danielpich/docker-react -f Dockerfile.dev . -v /var/run/docker.sock:/var/run/docker.sock
                     ''' 
             }
         }
