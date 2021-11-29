@@ -1,6 +1,6 @@
 pipeline {
     agent { 
-        lable 'macos' 
+        label 'macos' 
     }
     stages {
         stage('Test') {
