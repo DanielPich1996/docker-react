@@ -13,8 +13,14 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.dev
+    # volumes:
+    #   - /app/node_modules
+    #   - .:/app
     volumes:
-      - /app/node_modules
-      - .:/app
+      # enable persistent volume (warning: make sure that the local jenkins_home folder is created)
+      - /var/wisestep/data/jenkins_home:/var/jenkins_home
+      # mount docker sock and binary for docker in docker (only works on linux)
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
     command: ["npm", "run", "test"]
   

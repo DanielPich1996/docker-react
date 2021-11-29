@@ -1,13 +1,25 @@
 pipeline {
     agent { 
-        dockerfile true 
-        args '-v /var/run/docker.sock:/var/run/docker.sock' 
+        lable 'macos' 
     }
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'docker --version'
             }
         }
     }
 }
+
+// pipeline {
+//     agent { 
+//         dockerfile true 
+//     }
+//     stages {
+//         stage('Test') {
+//             steps {
+//                 sh 'node --version'
+//             }
+//         }
+//     }
+// }
