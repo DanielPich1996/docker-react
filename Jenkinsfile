@@ -12,6 +12,9 @@
 // }
 
 pipeline {
+    tool {
+        docker 'docker'
+    }
     agent any
     stages {
         stage('build') {
