@@ -1,15 +1,9 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16-alpine'
-            // Run the container on the node specified at the top-level of the Pipeline, in the same workspace, rather than on a new node entirely:
-            reuseNode true
-        }
-    }
+    agent { dockerfile true }
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                sh 'docker build -t danielpich/docker-react -f Dockerfile.dev .'
+                sh 'node --version'
             }
         }
     }
