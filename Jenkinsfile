@@ -12,10 +12,6 @@
 // }
 
 pipeline {
-
-    tools{
-        docker 'MyDocker'
-    }
     agent 
     {
         docker
