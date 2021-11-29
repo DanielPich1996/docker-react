@@ -1,16 +1,3 @@
-pipeline {
-    agent { 
-        label 'macos' 
-    }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'docker --version'
-            }
-        }
-    }
-}
-
 // pipeline {
 //     agent { 
 //         dockerfile true 
@@ -23,3 +10,24 @@ pipeline {
 //         }
 //     }
 // }
+
+pipeline {
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                echo 'building'
+            }
+        }
+        sstage('test') {
+            steps {
+                echo 'testing'
+            }
+        }
+        stage('deploy') {
+            steps {
+                echo 'deploying'
+            }
+        }
+    }
+}
