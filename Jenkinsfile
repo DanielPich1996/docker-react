@@ -17,7 +17,7 @@ pipeline {
         stage('build') {
             steps {
                 sh ''' 
-                    docker build -t danielpich/docker-react -f  -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean Dockerfile.dev .
+                    docker build -t danielpich/docker-react  -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean -f Dockerfile.dev .
                     ''' 
             }
         }
