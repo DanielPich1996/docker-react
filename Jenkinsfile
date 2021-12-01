@@ -1,11 +1,11 @@
 pipeline {
     agent { 
-        dockerfile true 
+        label 'macos' 
     }
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'docker --version'
             }
         }
     }
