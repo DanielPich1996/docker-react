@@ -5,7 +5,10 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'docker --version'
+                sh '''
+                    docker --version
+                    docker-compose version
+                '''
             }
         }
     }
