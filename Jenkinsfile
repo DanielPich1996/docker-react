@@ -3,11 +3,25 @@ pipeline {
         label 'macos' 
     }
     stages {
-        stage('Test') {
+        stage('check docker') {
             steps {
                 sh '''
                     docker --version
                     docker-compose version
+                '''
+            }
+        }
+        stage('build') {
+            steps {
+                sh '''
+                    - docker build -t danielpich/docker-react -f Dockerfile.dev .
+                '''
+            }
+        }
+        stage('test') {
+            steps {
+                sh '''
+                    docker run -e CI=true danielpich/docker-react npm run test
                 '''
             }
         }
