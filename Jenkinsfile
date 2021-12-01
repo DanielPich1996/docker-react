@@ -14,7 +14,7 @@ pipeline {
         stage('build') {
             steps {
                 sh '''
-                    - docker build -t danielpich/docker-react -f Dockerfile.dev .
+                    docker build -t danielpich/docker-react -f Dockerfile.dev .
                 '''
             }
         }
