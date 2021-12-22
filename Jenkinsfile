@@ -46,11 +46,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'docker context create ecs myecscontext --from-env'
+                sh 'docker context ls'
                 sh 'docker context use myecscontext'
                 sh 'docker compose up'
                 sh 'docker compose ps --format json'
-                sh 'docker context rm myecscontext'
             }
         }
     }
