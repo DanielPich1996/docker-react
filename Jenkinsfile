@@ -40,6 +40,7 @@ pipeline {
             steps {
                 sh 'docker context use default'
                 sh 'docker compose build'
+                sh 'docker login -u $DOCKER_HUB_CREDS --password-stdin'
                 sh 'docker compose push'
             }
         }
