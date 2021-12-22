@@ -4,9 +4,9 @@ services:
   web:
     environment:
       - CI=true
-    image: danielpich/docker-react:latest
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports: 
       - "3000:3000"
+    command: ["npm", "run", "test"]

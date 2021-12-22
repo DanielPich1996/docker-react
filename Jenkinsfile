@@ -2,6 +2,10 @@ pipeline {
     agent { 
         label 'macos' 
     }
+    environment {
+        DOCKER_HUB_CREDS = credentials('danielpich-docker-hub')
+        AWS_CREDS = credentials('danielpich-aws-cred')
+    }
     stages {
         stage('check docker') {
             steps {
@@ -11,18 +15,41 @@ pipeline {
                 '''
             }
         }
-        stage('build') {
+        // stage('build') {
+        //     steps {
+        //         sh '''
+        //             docker build -t danielpich/docker-react -f Dockerfile.dev .
+        //         '''
+        //     }
+        // }
+        // stage('test') {
+        //     steps {
+        //         sh '''
+        //             docker run -e CI=true danielpich/docker-react npm run test
+        //         '''
+        //     }
+        // }
+        // stage('Deploy') {
+        //     steps {
+        //         sh '''
+        //             docker context create ecs myecscontext --from-env
+        //         '''
+        //     }
+        // }
+        stage('Build') {
             steps {
-                sh '''
-                    docker build -t danielpich/docker-react -f Dockerfile.dev .
-                '''
+                sh 'docker context use default'
+                sh 'docker compose build'
+                sh 'docker compose push'
             }
         }
-        stage('test') {
+        stage('Deploy') {
             steps {
-                sh '''
-                    docker run -e CI=true danielpich/docker-react npm run test
-                '''
+                sh 'docker context create ecs myecscontext --from-env'
+                sh 'docker context use myecscontext'
+                sh 'docker compose up'
+                sh 'docker compose ps --format json'
+                sh 'docker context rm myecscontext'
             }
         }
     }
